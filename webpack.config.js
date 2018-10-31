@@ -4,11 +4,11 @@ module.exports = {
   mode: isDev ? 'development' : 'production',
   entry: [
     '@babel/polyfill', // enables async-await
-    './index.js'
+    './frontend/index.js'
   ],
   output: {
     path: __dirname,
-    filename: './public/bundle.js'
+    filename: './frontend/public/bundle.js'
   },
   resolve: {
     extensions: ['.js', '.jsx']
