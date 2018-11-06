@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
 const bodyParser = require('body-parser');
+const session = require('express-session');
 
 const app = express();
 
@@ -10,7 +11,15 @@ app.use(express.static(path.join(__dirname, '..', '..', 'frontend', 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/', require('./api'));
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || 'blah blah',
+    resave: false,
+    saveUninitialized: false
+  })
+);
+
+app.use('/api', require('./api'));
 
 app.use('*', (req, res) => {
   res.sendFile(
