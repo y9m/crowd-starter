@@ -10,6 +10,17 @@ const sessionStore = new SequelizeStore({ db });
 
 const app = express();
 
+passport.serializeUser((user, done) => done(null, user.id));
+
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await db.models.user.findById(id);
+    done(null, user);
+  } catch (err) {
+    done(err);
+  }
+});
+
 const createApp = () => {
   app.use(morgan('dev'));
   app.use(
