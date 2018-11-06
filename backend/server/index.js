@@ -3,7 +3,10 @@ const morgan = require('morgan');
 const path = require('path');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const passport = require('passport');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const db = require('./db');
+const sessionStore = new SequelizeStore({ db });
 
 const app = express();
 
@@ -55,3 +58,5 @@ const bootApp = async () => {
 };
 
 bootApp();
+
+module.exports = app;
