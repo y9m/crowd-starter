@@ -20,11 +20,13 @@ const createApp = () => {
 
   app.use(
     session({
-      secret: process.env.SESSION_SECRET || 'blah blah',
+      secret: process.env.SESSION_SECRET || 'Exposed secret',
       resave: false,
       saveUninitialized: false
     })
   );
+  app.use(passport.initialize());
+  app.use(passport.session());
 
   app.use('/api', require('./api'));
 
@@ -42,7 +44,7 @@ const createApp = () => {
 };
 
 const startListening = () => {
-  const port = process.env.port || 3000;
+  const port = process.env.PORT || 3000;
   app.listen(port, () => {
     console.log(`Server listening on port ${port}...`);
   });
