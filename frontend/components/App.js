@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import { AllCampaigns } from '../components';
+import { AllCampaigns, NewCampaignForm } from '../components';
 
 class App extends Component {
   render() {
@@ -8,6 +8,7 @@ class App extends Component {
       <BrowserRouter>
         <Switch>
           <Route exact path="/campaigns" component={AllCampaigns} />
+          <Route path="/campaigns/new" component={NewCampaignForm} />
           <Redirect to="/campaigns" />
         </Switch>
       </BrowserRouter>

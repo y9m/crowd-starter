@@ -68,14 +68,15 @@ contract Campaign {
     }
 
 	function getSummary() public view returns (
-        uint, uint, uint, uint, address
+        uint, uint, uint, uint, address, string
     ) {
         return (
             minimumContribution,
             this.balance,
             requests.length,
             approversCount,
-            owner
+            owner,
+            campaignName
         );
     }
 

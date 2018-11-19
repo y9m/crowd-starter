@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <Menu style={{ marginTop: '10px' }}>
       <a href="/" className="item">
-        Crowd Starter
+        Crowdstarter
       </a>
 
       <Menu.Menu position="right">
