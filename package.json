@@ -8,7 +8,8 @@
     "start": "node ./backend/server",
     "start-dev": "NODE_ENV='development' webpack -w & nodemon ./backend/server",
     "prettier": "prettier --write \"**/*.{js,jsx,json,css,scss,md}\"",
-    "compile": "node ethereum/compile.js"
+    "compile": "node ethereum/compile.js",
+    "deploy": "node ethereum/deploy.js"
   },
   "author": "",
   "license": "ISC",
