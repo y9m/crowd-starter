@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Layout } from '../components';
+import { Layout, ContributeForm } from '../components';
 import Campaign from '../../ethereum/campaign';
 import { Card, Grid, Button } from 'semantic-ui-react';
 import web3 from '../../ethereum/web3';
@@ -17,8 +17,13 @@ class SingleCampaign extends Component {
 
   async componentDidMount() {
     const campaign = Campaign(this.props.match.params.address);
-    const summary = await campaign.methods.getSummary().call();
-    const campaignName = await campaign.methods.campaignName().call();
+    const getSummary = campaign.methods.getSummary().call();
+    const getCampaignName = campaign.methods.campaignName().call();
+
+    const [summary, campaignName] = await Promise.all([
+      getSummary,
+      getCampaignName
+    ]);
 
     this.setState({
       minimumContribution: summary[0],
@@ -36,16 +41,10 @@ class SingleCampaign extends Component {
       owner,
       minimumContribution,
       requests,
-      approvers,
-      campaignName
+      approvers
     } = this.state;
 
     const items = [
-      {
-        header: campaignName,
-        meta: 'Name of Campaign',
-        style: { overflowWrap: 'break-word' }
-      },
       {
         header: owner,
         description:
@@ -85,10 +84,13 @@ class SingleCampaign extends Component {
     const { address } = this.props.match.params;
     return (
       <Layout>
-        <h3>Single Campaign</h3>
+        <h3>{this.state.campaignName}</h3>
         <Grid>
           <Grid.Row>
             <Grid.Column width={10}>{this.renderCards()}</Grid.Column>
+            <Grid.Column width={6}>
+              <ContributeForm address={address} />
+            </Grid.Column>
           </Grid.Row>
           <Grid.Row>
             <Grid.Column>

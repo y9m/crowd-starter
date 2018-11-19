@@ -24,6 +24,7 @@ class NewCampaignForm extends Component {
         });
 
       this.setState({ loading: false });
+      console.log('campaign form props', this.props);
       this.props.history.push('/campaigns');
     } catch (err) {
       this.setState({ loading: false, errorMessage: err.message });

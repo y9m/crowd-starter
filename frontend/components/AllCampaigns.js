@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import factory from '../../ethereum/factory';
 import { Card, Button } from 'semantic-ui-react';
 import { Layout } from '../components';
+import { NavLink } from 'react-router-dom';
 
 class AllCampaigns extends Component {
   state = {
@@ -18,7 +19,9 @@ class AllCampaigns extends Component {
     const items = campaigns.map(address => {
       return {
         header: address,
-        description: <a href={`campaigns/${address}`}>View Campaign</a>,
+        description: (
+          <NavLink to={`/campaigns/${address}`}>View Campaign</NavLink>
+        ),
         fluid: true
       };
     });
@@ -30,14 +33,14 @@ class AllCampaigns extends Component {
     return (
       <Layout>
         <h3>Open Campaigns</h3>
-        <a href="campaigns/new">
+        <NavLink to="/campaigns/new">
           <Button
             floated="right"
             content="Create Campaign"
             icon="add circle"
             primary
           />
-        </a>
+        </NavLink>
         {this.renderCampaigns()}
       </Layout>
     );
