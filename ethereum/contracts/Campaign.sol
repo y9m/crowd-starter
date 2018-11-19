@@ -22,9 +22,10 @@ contract Campaign {
         _;
     }
 
-    constructor(string name, uint minimum) public {
+    constructor(string name, uint minimum, address creator) public {
         campaignName = name;
         minimumContribution = minimum;
+        owner = creator;
     }
 
     function contribute() public payable {
