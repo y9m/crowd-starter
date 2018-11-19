@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./backend/server",
-    "start-dev": "NODE_ENV='development' webpack -w & nodemon ./backend/server"
+    "start-dev": "NODE_ENV='development' webpack -w & nodemon ./backend/server",
+    "prettier": "prettier --write \"**/*.{js,jsx,json,css,scss,md}\""
   },
   "author": "",
   "license": "ISC",
@@ -42,8 +43,22 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "css-loader": "^1.0.1",
+    "prettier": "^1.15.2",
+    "husky": "^1.1.2",
+    "lint-staged": "^7.3.0",
     "style-loader": "^0.23.1",
     "webpack": "^4.23.1",
     "webpack-cli": "^3.1.2"
+  },
+  "lint-staged": {
+    "*.{js,json,md,scss,yaml,yml}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
