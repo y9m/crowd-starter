@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha tests/*.spec.js",
     "start": "node ./backend/server",
     "start-dev": "NODE_ENV='development' webpack -w & nodemon ./backend/server",
-    "prettier": "prettier --write \"**/*.{js,jsx,json,css,scss,md}\""
+    "prettier": "prettier --write \"**/*.{js,jsx,json,css,scss,md}\"",
+    "compile": "node ethereum/compile.js"
   },
   "author": "",
   "license": "ISC",
