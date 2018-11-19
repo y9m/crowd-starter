@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Layout } from '../components';
+import { Layout, SingleRequest } from '../components';
 import { Button, Table } from 'semantic-ui-react';
 import { NavLink } from 'react-router-dom';
 import Campaign from '../../ethereum/campaign';
@@ -25,7 +25,20 @@ class AllRequests extends Component {
   }
 
   renderSingleRequest() {
-    return <h1>Single request</h1>;
+    const { requests, approversCount } = this.state;
+    const { address } = this.props.match.params;
+
+    return requests.map((request, index) => {
+      return (
+        <SingleRequest
+          key={index}
+          request={request}
+          address={address}
+          id={index}
+          approversCount={approversCount}
+        />
+      );
+    });
   }
 
   render() {

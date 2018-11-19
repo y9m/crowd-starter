@@ -6,3 +6,5 @@ export { default as NewCampaignForm } from './NewCampaignForm';
 export { default as SingleCampaign } from './SingleCampaign';
 export { default as ContributeForm } from './ContributeForm';
 export { default as AllRequests } from './AllRequests';
+export { default as SingleRequest } from './SingleRequest';
+export { default as NewRequestForm } from './NewRequestForm';

@@ -4,7 +4,8 @@ import {
   AllCampaigns,
   NewCampaignForm,
   SingleCampaign,
-  AllRequests
+  AllRequests,
+  NewRequestForm
 } from '../components';
 
 class App extends Component {
@@ -19,6 +20,10 @@ class App extends Component {
             exact
             path="/campaigns/:address/requests"
             component={AllRequests}
+          />
+          <Route
+            path="/campaigns/:address/requests/new"
+            component={NewRequestForm}
           />
         </Switch>
       </BrowserRouter>
