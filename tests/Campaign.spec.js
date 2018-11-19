@@ -51,4 +51,54 @@ describe('Campaigns', () => {
       expect(err).to.not.equal(null);
     }
   });
+
+  it('allows people to contribute money and marks them as approvers', async () => {
+    await campaign.methods.contribute().send({
+      value: '200',
+      from: accounts[1]
+    });
+    const isContributor = await campaign.methods.approvers(accounts[1]).call();
+    expect(isContributor).to.equal(true);
+  });
+
+  it('allows an owner to make a payment request', async () => {
+    await campaign.methods
+      .createRequest('Buy batteries', '100', accounts[1])
+      .send({
+        from: accounts[0],
+        gas: '1000000'
+      });
+    const request = await campaign.methods.requests(0).call();
+    expect(request.description).to.equal('Buy batteries');
+  });
+
+  it('can process requests', async () => {
+    await campaign.methods.contribute().send({
+      from: accounts[0],
+      value: web3.utils.toWei('10', 'ether')
+    });
+
+    await campaign.methods
+      .createRequest('A', web3.utils.toWei('5', 'ether'), accounts[1])
+      .send({
+        from: accounts[0],
+        gas: '1000000'
+      });
+
+    await campaign.methods.approveRequest(0).send({
+      from: accounts[0],
+      gas: '1000000'
+    });
+
+    await campaign.methods.finalizeRequest(0).send({
+      from: accounts[0],
+      gas: '1000000'
+    });
+
+    let balance = await web3.eth.getBalance(accounts[1]);
+    balance = web3.utils.fromWei(balance, 'ether');
+    balance = parseFloat(balance);
+
+    expect(balance).to.be.gt(104);
+  });
 });
