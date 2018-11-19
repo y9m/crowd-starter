@@ -94,7 +94,7 @@ class SingleCampaign extends Component {
           </Grid.Row>
           <Grid.Row>
             <Grid.Column>
-              <NavLink to={`campaigns/${address}/requests`}>
+              <NavLink to={`/campaigns/${address}/requests`}>
                 <Button primary>View Requests</Button>
               </NavLink>
             </Grid.Column>
