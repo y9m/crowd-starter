@@ -25,6 +25,7 @@ class App extends Component {
             path="/campaigns/:address/requests/new"
             component={NewRequestForm}
           />
+          <Redirect to="/campaigns" />
         </Switch>
       </BrowserRouter>
     );

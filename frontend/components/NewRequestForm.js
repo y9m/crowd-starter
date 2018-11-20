@@ -16,7 +16,7 @@ class NewRequestForm extends Component {
 
   handleSubmit = async event => {
     event.preventDefault();
-    this.setState({ loading: true });
+    this.setState({ loading: true, errorMessage: '' });
 
     try {
       const { description, value, recipient } = this.state;

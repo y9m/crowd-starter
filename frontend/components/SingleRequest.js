@@ -7,8 +7,18 @@ import { withRouter } from 'react-router';
 class SingleRequest extends Component {
   state = {
     approveLoading: false,
-    finalizeLoading: false
+    finalizeLoading: false,
+    hasVoted: false
   };
+
+  async componentDidMount() {
+    const { address, id } = this.props;
+    const accounts = await web3.eth.getAccounts();
+    const campaign = Campaign(address);
+
+    const hasVoted = await campaign.methods.hasVoted(id, accounts[0]).call();
+    this.setState({ hasVoted });
+  }
 
   handleApprove = async () => {
     this.setState({ approveLoading: true });
@@ -61,6 +71,7 @@ class SingleRequest extends Component {
               loading={this.state.approveLoading}
               color="green"
               onClick={this.handleApprove}
+              disabled={this.state.hasVoted}
             >
               Approve
             </Button>

@@ -15,7 +15,7 @@ contract Campaign {
     mapping(address => bool) public approvers;
     uint public minimumContribution;
     uint public approversCount;
-	  string public campaignName;
+	string public campaignName;
 
 	modifier restricted() {
         require(msg.sender == owner);
@@ -81,5 +81,10 @@ contract Campaign {
 
 	function getRequestsCount() public view returns (uint) {
         return requests.length;
+    }
+
+    function hasVoted(uint index, address approver) public view returns (bool) {
+        Request storage currentRequest = requests[index];
+        return currentRequest.approvalVoters[approver];
     }
 }

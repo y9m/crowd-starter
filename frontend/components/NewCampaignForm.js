@@ -14,7 +14,8 @@ class NewCampaignForm extends Component {
 
   handleSubmit = async event => {
     event.preventDefault();
-    this.setState({ loading: true });
+    this.setState({ loading: true, errorMessage: false });
+
     try {
       const accounts = await web3.eth.getAccounts();
       await factory.methods
@@ -24,7 +25,6 @@ class NewCampaignForm extends Component {
         });
 
       this.setState({ loading: false });
-      console.log('campaign form props', this.props);
       this.props.history.push('/campaigns');
     } catch (err) {
       this.setState({ loading: false, errorMessage: err.message });

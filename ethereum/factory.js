@@ -3,5 +3,5 @@ import CampaignFactory from './build/CampaignFactory.json';
 
 export default new web3.eth.Contract(
   JSON.parse(CampaignFactory.interface),
-  '0x540253F60B821490100e7daDac17c67b93866d68'
+  '0xf2752bB25Ad47315618a744fd21d16DD2620524c'
 );
